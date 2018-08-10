@@ -20,7 +20,7 @@ public partial class Admin_view_products : System.Web.UI.Page
     }
     protected void bind()
     {
-        dt = objsql.GetTable("select * from tblproduct ");
+        dt = objsql.GetTable("select * from tblproduct p Left Join tblstock s ON p.code=s.code ");
         if (dt.Rows.Count > 0)
         {
             gvdata.DataSource = dt;

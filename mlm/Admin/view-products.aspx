@@ -22,6 +22,7 @@
                 </ItemTemplate>
                 
               </asp:TemplateField>
+             <asp:BoundField DataField="stock" HeaderText="Stock" />
             <asp:TemplateField HeaderText="Action">
                 <ItemTemplate>
                     <asp:LinkButton ID="LinkButton1" CommandArgument='<%#Eval("id") %>' OnClick="LinkButton1_Click" runat="server">Edit</asp:LinkButton> / 

@@ -67,8 +67,8 @@
         </div>
     </div>
     <div class="col-md-4">
-        Total MRP : <asp:Label ID="lbltotal" runat="server" Text=""></asp:Label>
-            <asp:Label ID="lblbvtotal" runat="server" Text=""></asp:Label>
+        Total MRP : <asp:Label ID="lbltotal" runat="server" Text=""></asp:Label>&nbsp;&nbsp;&nbsp;
+        Total BV   <asp:Label ID="lblbvtotal" runat="server" Text=""></asp:Label>
     </div>
 </asp:Content>
 

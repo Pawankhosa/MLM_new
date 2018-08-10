@@ -47,6 +47,7 @@ public partial class Admin_Purchase : System.Web.UI.Page
                 MyDT.Columns.Add("Total");
                 MyDT.Columns.Add("BVTotal");
                 MyDT.Columns.Add("pid");
+                MyDT.Columns.Add("Code");
                 MyDT.Columns.Add();
 
                 MyRow = MyDT.NewRow();
@@ -61,6 +62,7 @@ public partial class Admin_Purchase : System.Web.UI.Page
                 MyRow[5] = (Convert.ToInt32(MyRow[3]) * Convert.ToInt32(MyRow[2]));
                 MyRow[6] = (Convert.ToInt32(MyRow[4]) * Convert.ToInt32(MyRow[2]));
                 MyRow[7] = Common.Get(objsql.GetSingleValue("select id from tblproduct where name='" + txtname.Text + "'"));
+                MyRow[8] = Common.Get(objsql.GetSingleValue("select code from tblproduct where name='" + txtname.Text + "'"));
                 MyDT.Rows.Add(MyRow);
 
 
@@ -70,21 +72,47 @@ public partial class Admin_Purchase : System.Web.UI.Page
             }
             else
             {
-                MyDT = (DataTable)Session["DataTable"];
-                MyRow = MyDT.NewRow();
+                string pccode = null;
+                foreach (DataRow dtr in MyDT.Rows)
+                {
+                    if (code == dtr["Code"].ToString())
+                    {
+                        pccode = "already";
+                        int qt = (Convert.ToInt32(MyDT.Rows[0][2].ToString()) + Convert.ToInt32(txtqty.Text));
 
-                MyRow[0] = MyDT.Rows.Count + 1;
+                        DataRow dr = dtr;
+                        dr["Quantity"] = qt.ToString();
+                        dr["Price"] = Common.Get(objsql.GetSingleValue("select mrp from tblproduct where code='" + code + "'"));
+                        dr["BV"] = Common.Get(objsql.GetSingleValue("select bv from tblproduct where code='" + code + "'"));
+                        dr["Total"] = (Convert.ToInt32(dr["Price"].ToString()) * Convert.ToInt32(qt));
+                        dr["BVTotal"] = (Convert.ToInt32(dr["BV"].ToString()) * Convert.ToInt32(qt));
+                        MyDT.AcceptChanges();
+                    }
+                }
 
-                MyRow[1] = txtname.Text;
+                if (pccode != null)
+                {
 
-                MyRow[2] = txtqty.Text;
-                MyRow[3] = Common.Get(objsql.GetSingleValue("select mrp from tblproduct where name='" + txtname.Text + "'"));
-                MyRow[4] = Common.Get(objsql.GetSingleValue("select bv from tblproduct where name='" + txtname.Text + "'"));
-                MyRow[5] = (Convert.ToInt32(MyRow[3]) * Convert.ToInt32(MyRow[2]));
-                MyRow[6] = (Convert.ToInt32(MyRow[4]) * Convert.ToInt32(MyRow[2]));
-                MyRow[7] = Common.Get(objsql.GetSingleValue("select id from tblproduct where name='" + txtname.Text + "'"));
-                MyDT.Rows.Add(MyRow);
 
+                }
+                else
+                {
+                    MyDT = (DataTable)Session["DataTable"];
+                    MyRow = MyDT.NewRow();
+
+                    MyRow[0] = MyDT.Rows.Count + 1;
+
+                    MyRow[1] = txtname.Text;
+
+                    MyRow[2] = txtqty.Text;
+                    MyRow[3] = Common.Get(objsql.GetSingleValue("select mrp from tblproduct where name='" + txtname.Text + "'"));
+                    MyRow[4] = Common.Get(objsql.GetSingleValue("select bv from tblproduct where name='" + txtname.Text + "'"));
+                    MyRow[5] = (Convert.ToInt32(MyRow[3]) * Convert.ToInt32(MyRow[2]));
+                    MyRow[6] = (Convert.ToInt32(MyRow[4]) * Convert.ToInt32(MyRow[2]));
+                    MyRow[7] = Common.Get(objsql.GetSingleValue("select code from tblproduct where name='" + txtname.Text + "'"));
+                    MyRow[8] = code;
+                    MyDT.Rows.Add(MyRow);
+                }
 
                 Session["DataTable"] = MyDT;
             }
