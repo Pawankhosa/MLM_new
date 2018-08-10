@@ -72,6 +72,7 @@ public partial class Admin_Purchase : System.Web.UI.Page
             }
             else
             {
+                MyDT = (DataTable)Session["DataTable"];
                 string pccode = null;
                 foreach (DataRow dtr in MyDT.Rows)
                 {
@@ -97,7 +98,7 @@ public partial class Admin_Purchase : System.Web.UI.Page
                 }
                 else
                 {
-                    MyDT = (DataTable)Session["DataTable"];
+                  
                     MyRow = MyDT.NewRow();
 
                     MyRow[0] = MyDT.Rows.Count + 1;
