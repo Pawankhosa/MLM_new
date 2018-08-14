@@ -11,11 +11,11 @@
 <%--            <asp:BoundField DataField="month" HeaderText="Month" />--%>
    
             <asp:BoundField DataField="name" HeaderText="Product Name" />
-            <asp:BoundField DataField="code" HeaderText="Father Name" />
+            <asp:BoundField DataField="code" HeaderText="Code" />
           
             <asp:BoundField DataField="mrp" HeaderText="Price" />
                <asp:BoundField DataField="bv" HeaderText="BV" />
-              <asp:TemplateField HeaderText="Status" >
+              <asp:TemplateField HeaderText="Image" >
                 <ItemTemplate>
                    
                   <img src='../uploadimage/<%#Eval("image") %>' width="80" />
