@@ -81,10 +81,7 @@ public partial class Admin_Book_Detail : System.Web.UI.Page
 
             }
             Finaltotal += Convert.ToInt32(payment.Text);
-
-        }
- 
-        
+        }       
     }
 
     protected void lbllist_Click(object sender, EventArgs e)

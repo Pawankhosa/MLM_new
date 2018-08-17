@@ -26,19 +26,26 @@ public partial class Admin_seveninstall : System.Web.UI.Page
         MyDT.Columns.Add();
      
         DataTable dt = new DataTable();
-        dt = objsql.GetTable("select distinct i.id,m.Name,m.mobile,cnt=(select count(*) from installment where id=i.Id ) from installment i Inner join MEMBER_CREATION m on m.id=i.Id ");
-        //dt = objsql.GetTable("select Distinct id from installment");
+        dt = objsql.GetTable("select distinct i.id,m.Name,m.mobile,i.paid,cnt=(select count(*) from installment where id=i.Id ) from installment i Inner join MEMBER_CREATION m on m.id=i.Id and i.paid='0'");
         foreach (DataRow dr in dt.Rows)
         {
          
             if (Convert.ToInt32(dr["cnt"].ToString()) >= 7)
             {
-                MyRow = MyDT.NewRow();
-                MyRow[0] = dr["id"];
-                MyRow[1] = dr["Name"];
-                MyRow[2] = dr["mobile"];
-                MyRow[3] = dr["cnt"];
-                MyDT.Rows.Add(MyRow);
+                //string billval = Common.Get(objsql.GetSingleValue("select purchaseid from tblMaster where regno ='" + dr["id"] + "'"));
+                //if (billval == "")
+                //{
+                    MyRow = MyDT.NewRow();
+                    MyRow[0] = dr["id"];
+                    MyRow[1] = dr["Name"];
+                    MyRow[2] = dr["mobile"];
+                    MyRow[3] = dr["cnt"];
+                    MyDT.Rows.Add(MyRow);
+                //}
+                //else
+                //{
+
+                //}
             }
             else
             {

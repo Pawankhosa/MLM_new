@@ -108,10 +108,11 @@ public partial class Admin_Default : System.Web.UI.Page
             {
                 {
                     SqlCommand cmd1 = new SqlCommand();
-                    cmd1.CommandText = "insert into installment values(@SR,@DATE_ENTRY,@ID,(select isnull(max(sno),0)+1 from installment))";
+                    cmd1.CommandText = "insert into installment values(@SR,@DATE_ENTRY,@ID,(select isnull(max(sno),0)+1 from installment),@paid)";
                     cmd1.Parameters.Add("@DATE_ENTRY", SqlDbType.DateTime).Value = Convert.ToDateTime(TextBox2.Text);
                     cmd1.Parameters.Add("@ID", SqlDbType.VarChar).Value = Convert.ToString(TextBox1.Text.ToUpper());
                     cmd1.Parameters.Add("@SR", SqlDbType.VarChar).Value = Convert.ToString(TextBox4.Text.ToUpper());
+                    cmd1.Parameters.Add("@paid", SqlDbType.VarChar).Value = "0";
                     cmd1.Connection = con;
                     cmd1.ExecuteNonQuery();
                 }

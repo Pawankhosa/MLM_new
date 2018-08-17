@@ -120,7 +120,7 @@ public partial class Admin_billing_product : System.Web.UI.Page
                         MyRow[4] = Common.Get(objsql.GetSingleValue("select bv from tblproduct where name='" + txtname.Text + "'"));
                         MyRow[5] = (Convert.ToInt32(MyRow[3]) * Convert.ToInt32(MyRow[2]));
                         MyRow[6] = (Convert.ToInt32(MyRow[4]) * Convert.ToInt32(MyRow[2]));
-                        MyRow[7] = Common.Get(objsql.GetSingleValue("select code from tblproduct where name='" + txtname.Text + "'"));
+                        MyRow[7] = Common.Get(objsql.GetSingleValue("select id from tblproduct where name='" + txtname.Text + "'"));
                         MyRow[8] = code;
                         MyDT.Rows.Add(MyRow);
                         txtqty.Text = "0";
@@ -196,12 +196,12 @@ public partial class Admin_billing_product : System.Web.UI.Page
     {
 
         objsql.ExecuteNonQuery("insert into tblMaster(purchaseid,regno,amount,status) values('" + invoice + "','" + txtregno.Text + "','" + lbltotal.Text + "','1')");
-
+        objsql.ExecuteNonQuery("update INSTALLMENT set paid='1' where id='" + txtregno.Text + "' ");
         foreach (GridViewRow gr in GridView1.Rows)
         {
             HiddenField item = (HiddenField)gr.FindControl("hfid");
             HiddenField qty = (HiddenField)gr.FindControl("qty");
-
+            code = Common.Get(objsql.GetSingleValue("select code from tblproduct where id='" + item.Value + "'"));
             objsql.ExecuteNonQuery("insert into tblSingle(purchaseid,date,regno,item,qty) values('" + invoice + "','" + System.DateTime.Now.ToString("MM/dd/yyyy") + "','" + txtregno.Text + "','" + item.Value + "','" + qty.Value + "')");
 
             string stock = Common.Get(objsql.GetSingleValue("select stock from tblstock where code ='" + code + "'"));
@@ -235,7 +235,7 @@ public partial class Admin_billing_product : System.Web.UI.Page
         //    }
 
         //}
-        Response.Redirect("managesale.aspx");
+        Response.Redirect("Default.aspx");
 
     }
 

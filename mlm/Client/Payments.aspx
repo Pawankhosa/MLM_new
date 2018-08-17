@@ -23,16 +23,22 @@
             <td style="text-align: center;">
                 <%--<form id="pnlContents" runat="server">--%>
                 <asp:Panel ID="pnlContents1" runat="server">
-                    <asp:GridView ID="GridView1" runat="server" Width="750px" CssClass="grid" HeaderStyle-CssClass="gridhead" AutoGenerateColumns="false">
+                    <asp:GridView ID="GridView1" runat="server" Width="750px" CssClass="grid" HeaderStyle-CssClass="gridhead" AutoGenerateColumns="false" OnRowCommand="GridView1_RowCommand">
                         <Columns>
                             <asp:TemplateField HeaderText="SR">
                                 <ItemTemplate>
                                     <%# Container.DataItemIndex+1 %>
                                 </ItemTemplate>
                             </asp:TemplateField>
+
                             <asp:BoundField DataField="Rec" HeaderText="REC No." />
                             <asp:BoundField DataField="DATE" HeaderText="DATE" />
                             <asp:BoundField DataField="ID" HeaderText="ID" />
+                            <asp:TemplateField>
+                                <ItemTemplate>
+                                     <asp:LinkButton ID="lnktransfer" runat="server" CommandName="transfer" CommandArgument='<%#Eval("Rec") %>'>Transfer</asp:LinkButton>
+                                </ItemTemplate>
+                            </asp:TemplateField>
                         </Columns>
                     </asp:GridView>
                 </asp:Panel>

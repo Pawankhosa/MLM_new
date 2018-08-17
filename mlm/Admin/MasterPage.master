@@ -92,6 +92,7 @@
                             <li><a href="ManageSale.aspx">Manage Sale</a></li>
                             <li><a href="AddfreeIns.aspx">Check Free Installment</a></li>
                             <li><a href="seveninstall.aspx">sale product</a></li>
+                            <li><a href="transfer-report.aspx">Transfer Report</a></li>
                             <li>
                                 <asp:LinkButton ID="LinkButton1" OnClick="LinkButton1_Click" runat="server">Log Out</asp:LinkButton></li>
                         </ul>

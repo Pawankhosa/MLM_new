@@ -71,13 +71,14 @@ public partial class Admin_AddfreeIns : System.Web.UI.Page
                 else
                 { 
                 SqlCommand cmd23 = new SqlCommand();
-                cmd23.CommandText = "insert into installment values(@SR,@DATE_ENTRY,@ID,(select isnull(max(sno),0)+1 from installment),@bookid,@adminid,@status)";
+                cmd23.CommandText = "insert into installment values(@SR,@DATE_ENTRY,@ID,(select isnull(max(sno),0)+1 from installment),@bookid,@adminid,@status,@paid)";
                 cmd23.Parameters.Add("@DATE_ENTRY", SqlDbType.DateTime).Value = Convert.ToDateTime(dtym);
                 cmd23.Parameters.Add("@ID", SqlDbType.VarChar).Value = Convert.ToString(spon.ToUpper());
                 cmd23.Parameters.Add("@SR", SqlDbType.VarChar).Value = Convert.ToString(id.ToUpper());
                 cmd23.Parameters.Add("@bookid", SqlDbType.VarChar).Value = "";
                 cmd23.Parameters.Add("@adminid", SqlDbType.VarChar).Value = "";
                 cmd23.Parameters.Add("@status", SqlDbType.VarChar).Value = "Free";
+                cmd23.Parameters.Add("@paid", SqlDbType.VarChar).Value = "0";
                 cmd23.Connection = con;
                 cmd23.ExecuteNonQuery();
                 // sponser = spon;

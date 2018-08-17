@@ -61,7 +61,7 @@
                         <nav id="mainnav1">
 
                             <ul style="margin:0px;">
-		<li class="main-menu">Main Menu</li>
+	                          	<li class="main-menu">Main Menu</li>
                                 <li><a href="default.aspx">Home</a></li>
                                 <li><a href="pwdchg.aspx">Password</a></li>
                                 <li><a href="Profile.aspx">Profile</a></li>
@@ -74,6 +74,7 @@
                                 <li><a href="payments.aspx">Your Installment</a></li>
                                  <li><a href="Leader-List.aspx">Groups</a></li>
                                 <li><a href="reward.aspx">Reward</a></li>
+                                 <li><a href="transfer-report.aspx">Transfer Report</a></li>
                                 <li>
                                     <asp:LinkButton ID="LinkButton1" OnClick="LinkButton1_Click" runat="server">Log Out</asp:LinkButton></li>
                             </ul>
