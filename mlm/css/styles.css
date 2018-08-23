@@ -540,7 +540,7 @@ nav#mainnav2 li a:hover {
 	padding:15px 20px;
 }
 .nav-tabs-dropdown {
-  /*display: none;*/
+  display: none;
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
 }
