@@ -9,7 +9,12 @@
     <asp:GridView ID="gvdata" runat="server" CssClass="table table-bordered" AutoGenerateColumns="false" >
         <Columns>
 <%--            <asp:BoundField DataField="month" HeaderText="Month" />--%>
-   
+      <asp:TemplateField HeaderText="Sr.No" >
+                <ItemTemplate>
+                 <%# Container.DataItemIndex+1 %>
+                </ItemTemplate>
+                
+              </asp:TemplateField>
             <asp:BoundField DataField="name" HeaderText="Product Name" />
             <asp:BoundField DataField="code" HeaderText="Code" />
           
@@ -23,6 +28,13 @@
                 
               </asp:TemplateField>
              <asp:BoundField DataField="stock" HeaderText="Stock" />
+              <asp:TemplateField HeaderText="Stock Updated Date" >
+                <ItemTemplate>
+                   
+                    <asp:Label ID="lbldate" runat="server" Text='<%#Eval("date") %>'></asp:Label>
+                </ItemTemplate>
+                
+              </asp:TemplateField>
             <asp:TemplateField HeaderText="Action">
                 <ItemTemplate>
                     <asp:LinkButton ID="LinkButton1" CommandArgument='<%#Eval("id") %>' OnClick="LinkButton1_Click" runat="server">Edit</asp:LinkButton> / 

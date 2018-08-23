@@ -1,20 +1,19 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Admin/MasterPage.master" AutoEventWireup="true" CodeFile="SaleHistory.aspx.cs" Inherits="Admin_SaleHistory" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Admin/MasterPage.master" AutoEventWireup="true" CodeFile="Sale-Record.aspx.cs" Inherits="Admin_Sale_Record" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
-      <div class="col-md-12">
+    <div class="col-md-12">
 
 
         <table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
             <thead>
                 <tr>
                     <th>Sr.No</th>
-                    <th> Date</th>
-                    <th>Product Name</th>  
-                     <th>Quantity</th>
-                    <th>MRP</th>
-                     <th>BV</th>
+                    <th>Regno</th>
+                    <th>Invoice</th>  
+                     <th>Amount</th>
+                    <th></th>
                     
                 </tr>
             </thead>
@@ -24,17 +23,16 @@
                         <td><%# Container.DataItemIndex+1 %></td>
 
                         <td>
-                           <%#Eval("date") %></td>
+                           <%#Eval("regno") %></td>
                         
                         <td>
-                            <%#Eval("name") %></td>
+                            <%#Eval("purchaseid") %></td>
                      <td>
-                            <%#Eval("qty") %></td>
+                            <%#Eval("amount") %></td>
                         <td>
-                            <%#Eval("mrp") %></td>
-                        <td>
-                            <%#Eval("bv") %></td>
-                       
+                      <asp:LinkButton ID="lnkedit" CommandArgument='<%#Eval("purchaseid") %>' OnClick="lnkedit_Click" runat="server">Sale History</asp:LinkButton> | 
+                      <asp:LinkButton ID="LinkButton1" CommandArgument='<%#Eval("purchaseid") %>' OnClick="LinkButton1_Click" runat="server">Delete</asp:LinkButton>
+                        </td>
                        
 
 

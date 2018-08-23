@@ -23,6 +23,7 @@
             <td style="text-align: center;">
                 <%--<form id="pnlContents" runat="server">--%>
                 <asp:Panel ID="pnlContents1" runat="server">
+                    <h2 style="text-align:center">Installment Delivery Ok</h2>
                     <asp:GridView ID="GridView1" runat="server" Width="750px" CssClass="grid" HeaderStyle-CssClass="gridhead" AutoGenerateColumns="false" OnRowCommand="GridView1_RowCommand">
                         <Columns>
                             <asp:TemplateField HeaderText="SR">
@@ -46,6 +47,7 @@
                 <asp:Button ID="btnPrint" runat="server" Text="Print" CssClass="btn-d" OnClientClick="return PrintPanel();" Visible="false" />
                 <%--  </form>--%>
                 <asp:Panel ID="pnlproduct" runat="server">
+                    <h2>Products</h2> 
                     <asp:GridView ID="GridView2" runat="server" Width="750px" CssClass="grid" HeaderStyle-CssClass="gridhead" AutoGenerateColumns="false" OnRowDataBound="GridView2_RowDataBound">
                         <Columns>
                             <asp:TemplateField HeaderText="SR">

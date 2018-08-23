@@ -6,7 +6,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-public partial class Admin_ManageSale : System.Web.UI.Page
+public partial class Admin_History_Record : System.Web.UI.Page
 {
     SQLHelper objsql = new SQLHelper();
     DataTable dt = new DataTable();
@@ -14,12 +14,15 @@ public partial class Admin_ManageSale : System.Web.UI.Page
     {
         if (!IsPostBack)
         {
-            bind();
+            if (Request.QueryString["id"] != null)
+            {
+                bind();
+            }
         }
     }
     protected void bind()
     {
-        dt = objsql.GetTable("select * from tblmasterorder");
+        dt = objsql.GetTable("  select p.name,o.Purchaseid,o.date,o.qty,p.mrp,p.bv from tblproduct p , tblSingle o where p.id=o.item and o.Purchaseid='" + Request.QueryString["id"] + "'");
         if (dt.Rows.Count > 0)
         {
             gvpins.DataSource = dt;
@@ -30,13 +33,13 @@ public partial class Admin_ManageSale : System.Web.UI.Page
     protected void lnkedit_Click(object sender, EventArgs e)
     {
         string id = (sender as LinkButton).CommandArgument;
-        Response.Redirect("salehistory.aspx?id=" + id);
+        Response.Redirect("product.aspx?id=" + id);
     }
 
-    //protected void LinkButton1_Click(object sender, EventArgs e)
-    //{
-    //    string id = (sender as LinkButton).CommandArgument;
-    //    objsql.ExecuteNonQuery("delete from tblproducts where id=" + id);
-    //    bind();
-    //}
+    protected void LinkButton1_Click(object sender, EventArgs e)
+    {
+        string id = (sender as LinkButton).CommandArgument;
+        objsql.ExecuteNonQuery("delete from tblproduct where id=" + id);
+        bind();
+    }
 }

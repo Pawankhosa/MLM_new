@@ -7,6 +7,10 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
      <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
      <h3>Sale Product</h3>
+        Date <asp:TextBox ID="txtdate" runat="server"></asp:TextBox>
+    <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ErrorMessage="Please fill out this" ControlToValidate="txtdate" ValidationGroup="g1" ForeColor="Red"></asp:RequiredFieldValidator>
+           <ajaxToolkit:CalendarExtender ID="txtdate_CalendarExtender" runat="server" BehaviorID="txtdate_CalendarExtender" TargetControlID="txtdate" Format="dd/MM/yyyy" />
+
            <hr />
 
        <div class="col-md-8">
@@ -14,8 +18,7 @@
         <div class="col-md-12">
             <div class="form-group col-md-4">
                 <asp:Label ID="txtregno" runat="server" Text="Label"></asp:Label>
-           <%-- <asp:TextBox ID="txtregno" AutoPostBack="true" OnTextChanged="txtregno_TextChanged" runat="server" class="form-control" placeholder="Enter Id"></asp:TextBox>--%>
-                <asp:Label ID="lblname" runat="server" Text=""></asp:Label>
+                   <asp:Label ID="lblname" runat="server" Text=""></asp:Label>
           
         </div>
         <div class="form-group col-md-4">
@@ -25,18 +28,11 @@
             <ajaxToolkit:AutoCompleteExtender ID="txtname_AutoCompleteExtender" runat="server"  ServiceMethod="SearchCustomers" BehaviorID="txtname_AutoCompleteExtender" MinimumPrefixLength="2"
                 CompletionInterval="100" EnableCaching="false" CompletionSetCount="10" TargetControlID="txtname" FirstRowSelected="false">
             </ajaxToolkit:AutoCompleteExtender>
-
-            <%--<ajaxtoolkit:autocompleteextender ServiceMethod="SearchCustomers"
-                MinimumPrefixLength="2"
-                CompletionInterval="100" EnableCaching="false" CompletionSetCount="10"
-                TargetControlID="txtname"
-                ID="AutoCompleteExtender1" runat="server" FirstRowSelected="false">
-            </ajaxtoolkit:autocompleteextender>--%>
         </div>
         <div class="form-group col-md-4">
            
             <asp:TextBox ID="txtqty" placeholder="Quantity" runat="server" class="form-control"></asp:TextBox>
-            <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="Please fill out this" ControlToValidate="txtqty" ValidationGroup="g"></asp:RequiredFieldValidator>
+            <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ErrorMessage="Please fill out this" ForeColor="Red" ControlToValidate="txtqty" ValidationGroup="g"></asp:RequiredFieldValidator>
             <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server" ValidationExpression="^\d+$" ControlToValidate="txtqty" ValidationGroup="g" ErrorMessage="enter Numeric value only"></asp:RegularExpressionValidator>
         </div>
 
@@ -69,12 +65,13 @@
                      </asp:TemplateField>
                 </Columns>
             </asp:GridView>
-            <asp:Button ID="Button1" Visible="false" runat="server" OnClick="Button1_Click"  Text="Create Invoice" CssClass="btn btn-danger" />
+            <asp:Button ID="Button1" Visible="false" runat="server" OnClick="Button1_Click"  Text="Create Invoice" CssClass="btn btn-danger" ValidationGroup="g1"/>
+                  <asp:ValidationSummary ID="ValidationSummary2" runat="server" ValidationGroup="g1" DisplayMode="BulletList"  />
         </div>
     </div>
     <div class="col-md-4">
         Total MRP : <asp:Label ID="lbltotal" runat="server" Text=""></asp:Label>&nbsp;&nbsp;&nbsp;
-        Total BV   <asp:Label ID="lblbvtotal" runat="server" Text=""></asp:Label>
+        Total BV :  <asp:Label ID="lblbvtotal" runat="server" Text=""></asp:Label>
     </div>
 </asp:Content>
 

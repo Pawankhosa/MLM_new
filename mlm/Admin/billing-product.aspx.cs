@@ -27,6 +27,8 @@ public partial class Admin_billing_product : System.Web.UI.Page
         }
         txtregno.Text = Request.QueryString["id"].ToString();
         lblname.Text = Common.Get(objsql.GetSingleValue("select name from member_creation where id='" + txtregno.Text + "'"));
+      //  txtdate.Text = System.DateTime.Now.ToString("dd/MM/yyyy");
+        txtdate.Attributes.Add("readonly", "readonly");
     }
 
     protected void btnsubmit_Click(object sender, EventArgs e)
@@ -194,15 +196,18 @@ public partial class Admin_billing_product : System.Web.UI.Page
 
     protected void Button1_Click(object sender, EventArgs e)
     {
+        string []selecteddate = txtdate.Text.Split('/');
+        txtdate.Text = selecteddate[1] + "/" + selecteddate[0] + "/" + selecteddate[2];
+
 
         objsql.ExecuteNonQuery("insert into tblMaster(purchaseid,regno,amount,status) values('" + invoice + "','" + txtregno.Text + "','" + lbltotal.Text + "','1')");
-        objsql.ExecuteNonQuery("update INSTALLMENT set paid='1' where id='" + txtregno.Text + "' ");
+        objsql.ExecuteNonQuery("update INSTALLMENT set paid='1',purchaseid='" + invoice + "' where id='" + txtregno.Text + "' and paid='0' ");
         foreach (GridViewRow gr in GridView1.Rows)
         {
             HiddenField item = (HiddenField)gr.FindControl("hfid");
             HiddenField qty = (HiddenField)gr.FindControl("qty");
             code = Common.Get(objsql.GetSingleValue("select code from tblproduct where id='" + item.Value + "'"));
-            objsql.ExecuteNonQuery("insert into tblSingle(purchaseid,date,regno,item,qty) values('" + invoice + "','" + System.DateTime.Now.ToString("MM/dd/yyyy") + "','" + txtregno.Text + "','" + item.Value + "','" + qty.Value + "')");
+            objsql.ExecuteNonQuery("insert into tblSingle(purchaseid,date,regno,item,qty) values('" + invoice + "','" + txtdate.Text + "','" + txtregno.Text + "','" + item.Value + "','" + qty.Value + "')");
 
             string stock = Common.Get(objsql.GetSingleValue("select stock from tblstock where code ='" + code + "'"));
             string dedqty = ((Convert.ToInt32(stock)) - (Convert.ToInt32(qty.Value))).ToString();
@@ -235,7 +240,7 @@ public partial class Admin_billing_product : System.Web.UI.Page
         //    }
 
         //}
-        Response.Redirect("Default.aspx");
+        Response.Redirect("Sale-Record.aspx");
 
     }
 

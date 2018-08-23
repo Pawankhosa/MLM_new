@@ -1,9 +1,9 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Admin/MasterPage.master" AutoEventWireup="true" CodeFile="SaleHistory.aspx.cs" Inherits="Admin_SaleHistory" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Admin/MasterPage.master" AutoEventWireup="true" CodeFile="History-Record.aspx.cs" Inherits="Admin_History_Record" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
-      <div class="col-md-12">
+          <div class="col-md-12">
 
 
         <table id="example" class="table table-striped table-bordered" cellspacing="0" width="100%">
@@ -25,7 +25,6 @@
 
                         <td>
                            <%#Eval("date") %></td>
-                        
                         <td>
                             <%#Eval("name") %></td>
                      <td>

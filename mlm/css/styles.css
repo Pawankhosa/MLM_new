@@ -75,7 +75,7 @@ a {
 	color:#D6593D;
 }
 a:hover {
-	color#c63d8f;
+	color:#c63d8f;
 }
 a:focus {
 	outline:none;
@@ -413,7 +413,7 @@ nav#mainnav-m ul {
 }
 nav#mainnav-m ul li {
 	border-bottom:none;
-	padding: 0px 20px;s
+	padding: 0px 20px;
 	display: block;
 	float: left;
 }
@@ -540,7 +540,7 @@ nav#mainnav2 li a:hover {
 	padding:15px 20px;
 }
 .nav-tabs-dropdown {
-  display: none;
+  /*display: none;*/
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
 }

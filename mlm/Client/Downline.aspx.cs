@@ -101,9 +101,9 @@ public partial class Client_Default2 : System.Web.UI.Page
                 pnpa.Visible = true;
             }
   
-            ins.Text = Common.Get(objsql.GetSingleValue("select count(*) from installment where id='" + mid.Value + "'"));
-            pre.Text = Common.Get(objsql.GetSingleValue("select count(*) from installment where id='" + mid.Value + "' and Date_entry Between '" + from + "' And '" + to + "'"));
-            cur.Text = Common.Get(objsql.GetSingleValue("select count(*) from installment where id=" + mid.Value + " and Date_entry > '" + to + "'"));
+            ins.Text = Common.Get(objsql.GetSingleValue("select count(*) from installment where id='" + mid.Value + "' and paid='0'"));
+            pre.Text = Common.Get(objsql.GetSingleValue("select count(*) from installment where id='" + mid.Value + "' and Date_entry Between '" + from + "' And '" + to + "' and paid='0'"));
+            cur.Text = Common.Get(objsql.GetSingleValue("select count(*) from installment where id=" + mid.Value + " and Date_entry > '" + to + "' and paid='0'"));
 
             if (Convert.ToInt32(ins.Text) >= 8)
             {

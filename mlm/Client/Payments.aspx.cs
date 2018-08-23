@@ -10,6 +10,10 @@ public partial class Client_Default2 : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
+        if (Session["id"].ToString() == null)
+        {
+            Response.Redirect("../Client.aspx");
+        }
         if (Page.IsPostBack == false)
         {
             BindInstall();
@@ -22,7 +26,7 @@ public partial class Client_Default2 : System.Web.UI.Page
         con.ConnectionString = ConfigurationManager.ConnectionStrings["cn"].ConnectionString;
         con.Open();
         SqlCommand cmd = new SqlCommand();
-        cmd.CommandText = "select row_number() over (order by sr) as SR,SR as 'Rec',DATE_ENTRY as DATE,ID,paid from installment where id='161100131' and paid='0' order by DATE_ENTRY";
+        cmd.CommandText = "select row_number() over (order by sr) as SR,SR as 'Rec',DATE_ENTRY as DATE,ID,paid from installment where id='"+ Session["id"] + "' and paid='0' order by DATE_ENTRY";
         cmd.Parameters.Add("@ID", SqlDbType.VarChar).Value = Convert.ToString(Session["ID"]);
         cmd.Connection = con;
         GridView1.DataSource = cmd.ExecuteReader();
@@ -36,9 +40,9 @@ public partial class Client_Default2 : System.Web.UI.Page
         if (dt.Rows.Count > 0)
         {
             //pnlproduct.Visible = true;
-            //pnlContents1.Visible = false;
+          
             DataTable dts = new DataTable();
-            dts = objsql.GetTable("select p.name,p.mrp,p.bv,p.image,s.qty,s.date,s.purchaseid from tblproduct p Inner join tblSingle s on s.item = p.code and s.purchaseid = '36505'");
+            dts = objsql.GetTable("select p.name,p.mrp,p.bv,p.image,s.qty,s.date,s.purchaseid from tblproduct p Inner join tblSingle s on s.item = p.id and s.regno = '"+ Session["id"] + "'");
             GridView2.DataSource = dts;
             GridView2.DataBind();
 

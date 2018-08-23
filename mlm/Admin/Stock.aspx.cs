@@ -18,7 +18,6 @@ public partial class Admin_Stock : System.Web.UI.Page
         }
 
     }
-
     protected void btnsubmit_Click(object sender, EventArgs e)
     {
         if (Request.QueryString["id"] != null)

@@ -1,0 +1,58 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+
+public partial class Admin_Sale_Record : System.Web.UI.Page
+{
+    SQLHelper objsql = new SQLHelper();
+    DataTable dt = new DataTable();
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        if (!IsPostBack)
+        {
+            bind();
+        }
+    }
+    protected void bind()
+    {
+        dt = objsql.GetTable("select * from tblMaster");
+        if (dt.Rows.Count > 0)
+        {
+            gvpins.DataSource = dt;
+            gvpins.DataBind();
+        }
+    }
+
+    protected void lnkedit_Click(object sender, EventArgs e)
+    {
+        string id = (sender as LinkButton).CommandArgument;
+        Response.Redirect("History-Record.aspx?id=" + id);
+    }
+
+    protected void LinkButton1_Click(object sender, EventArgs e)
+    {
+        string id = (sender as LinkButton).CommandArgument;
+        objsql.ExecuteNonQuery("delete from tblMaster where purchaseid=" + id);
+
+        objsql.ExecuteNonQuery("update INSTALLMENT set paid='0',purchaseid='' where purchaseid=" + id);
+        DataTable dtm = new DataTable();
+        dtm= objsql.GetTable("select * from tblSingle where purchaseid=" + id);
+
+        foreach (DataRow dtr in dtm.Rows)
+        {
+            string code = Common.Get(objsql.GetSingleValue("select code from tblproduct where id ='" + dtr["item"] + "'"));
+            string stock = Common.Get(objsql.GetSingleValue("select stock from tblstock where code ='" + code + "'"));
+            string dedqty = ((Convert.ToInt32(stock)) + (Convert.ToInt32(dtr["qty"]))).ToString();
+            objsql.ExecuteNonQuery("update tblstock set stock='" + dedqty + "' where code ='" + code + "'");
+        }
+       
+        objsql.ExecuteNonQuery("delete from tblSingle where purchaseid=" + id);
+        bind();
+    }
+
+
+}
