@@ -3,6 +3,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
+    <h2>Sale History</h2>
           <div class="col-md-12">
 
 
@@ -24,7 +25,7 @@
                         <td><%# Container.DataItemIndex+1 %></td>
 
                         <td>
-                           <%#Eval("date") %></td>
+                           <%# Convert.ToDateTime(Eval("date")).ToString("dd/MM/yyyy") %></td>
                         <td>
                             <%#Eval("name") %></td>
                      <td>

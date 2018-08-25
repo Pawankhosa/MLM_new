@@ -40,4 +40,17 @@ public partial class Admin_view_products : System.Web.UI.Page
         string id = (sender as LinkButton).CommandArgument;
         Response.Redirect("stock.aspx?id=" + id);
     }
+
+
+    protected void gvdata_RowDataBound(object sender, GridViewRowEventArgs e)
+    {
+        if (e.Row.RowType == DataControlRowType.DataRow)
+        {
+            Label lbldate = (Label)e.Row.FindControl("lbldate");
+            if(lbldate.Text!=null && lbldate.Text!="")
+            {
+                lbldate.Text= Convert.ToDateTime(lbldate.Text).ToString("dd/MM/yyyy");
+            }
+        }
+    }
 }

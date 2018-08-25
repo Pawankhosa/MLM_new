@@ -14,9 +14,13 @@
             <label>Product code</label>
             <asp:TextBox ID="txtcode" runat="server" CssClass="form-control"  placeholder="Code"></asp:TextBox>
         </div>
+         <div class="form-group">
+            <label>Serial No.</label>
+            <asp:TextBox ID="txtserial" runat="server" CssClass="form-control"  placeholder="Serial No."></asp:TextBox>
+        </div>
         <div class="form-group">
             <label>Price</label>
-            <asp:TextBox ID="txtmrp" runat="server" CssClass="form-control" placeholder="Code"></asp:TextBox>
+            <asp:TextBox ID="txtmrp" runat="server" CssClass="form-control" placeholder="Price"></asp:TextBox>
         </div>
          <div class="form-group">
             <label>BV</label>

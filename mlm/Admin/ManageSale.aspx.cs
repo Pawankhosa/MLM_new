@@ -14,6 +14,14 @@ public partial class Admin_ManageSale : System.Web.UI.Page
     {
         if (!IsPostBack)
         {
+            if (Session["success"] == "true")
+            {
+                Page.ClientScript.RegisterStartupScript(GetType(), "msgbox", "alert('Success');", true);
+            }
+            else
+            {
+
+            }
             bind();
         }
     }
@@ -25,6 +33,7 @@ public partial class Admin_ManageSale : System.Web.UI.Page
             gvpins.DataSource = dt;
             gvpins.DataBind();
         }
+        Session["success"] = "false";
     }
 
     protected void lnkedit_Click(object sender, EventArgs e)

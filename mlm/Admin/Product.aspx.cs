@@ -45,11 +45,11 @@ public partial class Admin_Product : System.Web.UI.Page
         }
         if (Request.QueryString["id"] != null)
         {
-            objsql.ExecuteNonQuery("update tblproduct set name='" + txtname.Text + "',Mrp='" + txtmrp.Text + "',image='" + imagename + "',bv='"+txtbv.Text+ "' where id='" + Request.QueryString["id"] + "'");
+            objsql.ExecuteNonQuery("update tblproduct set name='" + txtname.Text + "',Mrp='" + txtmrp.Text + "',image='" + imagename + "',bv='"+txtbv.Text+ "',serial='"+txtserial.Text+"' where id='" + Request.QueryString["id"] + "'");
         }
         else
         {
-            objsql.ExecuteNonQuery("insert into tblproduct(name,code,mrp,image,bv) values('" + txtname.Text + "','" + txtcode.Text + "','" + txtmrp.Text + "','"+imagename+ "','" + txtbv.Text + "')");
+            objsql.ExecuteNonQuery("insert into tblproduct(name,code,mrp,image,bv,serial) values('" + txtname.Text + "','" + txtcode.Text + "','" + txtmrp.Text + "','"+imagename+ "','" + txtbv.Text + "','" + txtserial.Text + "')");
         }
         img = "";
         Response.Redirect("view-products.aspx");
@@ -65,7 +65,7 @@ public partial class Admin_Product : System.Web.UI.Page
             txtcode.Text= dt1.Rows[0]["code"].ToString();
             img = dt1.Rows[0]["image"].ToString();
             txtbv.Text= dt1.Rows[0]["bv"].ToString();
-          
+          txtserial.Text= dt1.Rows[0]["serial"].ToString();
         }
     }
 }

@@ -261,6 +261,7 @@ public partial class Admin_Purchase : System.Web.UI.Page
 
             }
         cnt = 0;
+        Session["success"] = "true";
         Response.Redirect("managesale.aspx");
 
     }

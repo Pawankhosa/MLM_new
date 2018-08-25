@@ -14,7 +14,7 @@
         .dropdown-btn {
             padding: 6px 8px 6px 16px;
             text-decoration: none;
-            font-size: 20px;
+            /*font-size: 20px;*/
             color: #818181;
             display: block;
             border: none;
@@ -25,10 +25,10 @@
             outline: none;
         }
 
-        /* On mouse-over */
-        .mainnav2 a:hover, .dropdown-btn:hover {
-            color: #f1f1f1;
-        }
+            /* On mouse-over */
+            .mainnav2 a:hover, .dropdown-btn:hover {
+                /*color: #f1f1f1;*/
+            }
 
         /* Main content */
         .main {
@@ -39,21 +39,28 @@
 
         /* Add an active class to the active dropdown button */
         .active {
-            background-color: green;
-            color: white;
+            /*background-color: green;*/
+            /*color: white;*/
         }
 
         /* Dropdown container (hidden by default). Optional: add a lighter background color and some left padding to change the design of the dropdown content */
         .dropdown-container {
             display: none;
-            background-color: #262626;
+            /*background-color: #262626;*/
             padding-left: 8px;
         }
 
         /* Optional: Style the caret down icon */
         .fa-caret-down {
             float: right;
-            padding-right: 8px;
+            padding-right: 4px;
+        }
+
+        .new {
+            margin-top: 3px;
+            margin-bottom: 4px;
+            border: 0;
+            border-top: 1px solid #eee;
         }
     </style>
 
@@ -70,8 +77,11 @@
     <script type="text/javascript" src="../js/bootstrap.js"></script>
     <script type="text/javascript" src="../js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../js/npm.js"></script>
-
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap.min.js"></script>
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0" />
+
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
@@ -135,17 +145,26 @@
                             <li><a href="Leader-search.aspx">Leader Search</a></li>
                             <li><a href="Setting.aspx">Setting</a></li>
                             <li><a href="Receipt.aspx">Receipt Details</a></li>
-                            <li><a href="Product.aspx">Inventory</a></li>
-                            <li><a href="view-products.aspx">Inventory List</a></li>
-                            <li><a href="Purchase.aspx">Purchase</a></li>
-                            <li><a href="ManageSale.aspx">Manage Sale</a></li>
+
+                            <li class="dropdown-btn">BV Billing<i class="caret fa-caret-down"></i></li>
+                            <li class="dropdown-container">
+                                <a href="Purchase.aspx">Purchase</a>
+                                <hr class="new" />
+                                <a href="ManageSale.aspx">Manage Sale</a>
+                                <hr class="new" />
+                                <a href="Product.aspx">Inventory</a>
+                                <hr class="new" />
+                                <a href="view-products.aspx">Inventory List</a>
+                            </li>
                             <li><a href="AddfreeIns.aspx">Check Free Installment</a></li>
-                            <li class="dropdown-btn">Settings<i class="fa fa-caret-down"></i>
-                                    <ul class="dropdown-container">
-                                        <li><a href="seveninstall.aspx">sale product</a></li>
-                                        <li><a href="Sale-Record.aspx">Manage products sale </a></li>
-                                    </ul>
-                                </li>
+                            <li class="dropdown-btn">Installment Billing<i class="caret fa-caret-down"></i></li>
+
+                            <%--<li class="dropdown-container">--%>
+                            <li class="dropdown-container"><a href="seveninstall.aspx">sale product</a>
+                                <hr class="new" />
+                                <a href="Sale-Record.aspx">Manage products sale </a></li>
+                            <%-- </li>--%>
+
 
                             <li><a href="transfer-report.aspx">Transfer Report</a></li>
                             <li>
@@ -167,21 +186,26 @@
             <p>&copy; Toplife 2016.</p>
         </div>
     </form>
-    <script>
-        var dropdown = document.getElementsByClassName("dropdown-btn");
-        var i;
+    <script type="text/javascript">
+        {
+            var dropdown = document.getElementsByClassName("dropdown-btn");
+            var i;
 
-        for (i = 0; i < dropdown.length; i++) {
-            dropdown[i].addEventListener("click", function () {
-                this.classList.toggle("active");
-                var dropdownContent = this.nextElementSibling;
-                if (dropdownContent.style.display === "block") {
-                    dropdownContent.style.display = "none";
-                } else {
-                    dropdownContent.style.display = "block";
-                }
-            });
+            for (i = 0; i < dropdown.length; i++) {
+                dropdown[i].addEventListener("click", function () {
+                    this.classList.toggle("active");
+                    var dropdownContent = this.nextElementSibling;
+                    if (dropdownContent.style.display === "block") {
+                        dropdownContent.style.display = "none";
+                    } else {
+                        dropdownContent.style.display = "block";
+                    }
+                });
+            }
         }
     </script>
+<%--    <script src="../css/bootstrap-confirm-delete.js"></script>
+    <link href="../css/bootstrap-confirm-delete.css" rel="stylesheet" />
+    <a href="../css/bower.json">../css/bower.json</a>--%>
 </body>
 </html>

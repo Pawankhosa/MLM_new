@@ -6,7 +6,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
      <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
-     <h3>Sale Product</h3>
+     <h2>Sale Product</h2>
         Date <asp:TextBox ID="txtdate" runat="server"></asp:TextBox>
     <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ErrorMessage="Please fill out this" ControlToValidate="txtdate" ValidationGroup="g1" ForeColor="Red"></asp:RequiredFieldValidator>
            <ajaxToolkit:CalendarExtender ID="txtdate_CalendarExtender" runat="server" BehaviorID="txtdate_CalendarExtender" TargetControlID="txtdate" Format="dd/MM/yyyy" />

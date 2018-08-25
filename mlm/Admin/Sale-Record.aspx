@@ -1,8 +1,9 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Admin/MasterPage.master" AutoEventWireup="true" CodeFile="Sale-Record.aspx.cs" Inherits="Admin_Sale_Record" %>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
+    <h2>Sale Record</h2>
     <div class="col-md-12">
 
 
@@ -11,10 +12,10 @@
                 <tr>
                     <th>Sr.No</th>
                     <th>Regno</th>
-                    <th>Invoice</th>  
-                     <th>Amount</th>
+                    <th>Invoice</th>
+                    <th>Amount</th>
                     <th></th>
-                    
+
                 </tr>
             </thead>
             <asp:ListView ID="gvpins" runat="server">
@@ -23,17 +24,18 @@
                         <td><%# Container.DataItemIndex+1 %></td>
 
                         <td>
-                           <%#Eval("regno") %></td>
-                        
+                            <%#Eval("regno") %></td>
+
                         <td>
                             <%#Eval("purchaseid") %></td>
-                     <td>
+                        <td>
                             <%#Eval("amount") %></td>
                         <td>
-                      <asp:LinkButton ID="lnkedit" CommandArgument='<%#Eval("purchaseid") %>' OnClick="lnkedit_Click" runat="server">Sale History</asp:LinkButton> | 
-                      <asp:LinkButton ID="LinkButton1" CommandArgument='<%#Eval("purchaseid") %>' OnClick="LinkButton1_Click" runat="server">Delete</asp:LinkButton>
+                            <asp:LinkButton ID="lnkedit" CommandArgument='<%#Eval("purchaseid") %>' OnClick="lnkedit_Click" runat="server">Sale History</asp:LinkButton>
+                            | 
+                      <asp:LinkButton ID="LinkButton1" CommandArgument='<%#Eval("purchaseid") %>' OnClick="LinkButton1_Click" runat="server" OnClientClick="return GetConfirmation();">Delete</asp:LinkButton>
                         </td>
-                       
+
 
 
                 </ItemTemplate>
@@ -42,5 +44,16 @@
 
 
     </div>
+    <script type="text/javascript">
+        function GetConfirmation() {
+            var reply = confirm("Ary you sure you want to delete this?");
+            if (reply) {
+                return true;
+            }
+            else {
+                return fase;
+            }
+        }
+    </script>
 </asp:Content>
 

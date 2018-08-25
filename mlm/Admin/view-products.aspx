@@ -6,9 +6,8 @@
         <h3>View Product</h3>
     <hr />
    
-    <asp:GridView ID="gvdata" runat="server" CssClass="table table-bordered" AutoGenerateColumns="false" >
+    <asp:GridView ID="gvdata" runat="server" CssClass="table table-bordered" AutoGenerateColumns="false" OnRowDataBound="gvdata_RowDataBound" >
         <Columns>
-<%--            <asp:BoundField DataField="month" HeaderText="Month" />--%>
       <asp:TemplateField HeaderText="Sr.No" >
                 <ItemTemplate>
                  <%# Container.DataItemIndex+1 %>
@@ -17,9 +16,9 @@
               </asp:TemplateField>
             <asp:BoundField DataField="name" HeaderText="Product Name" />
             <asp:BoundField DataField="code" HeaderText="Code" />
-          
+           <asp:BoundField DataField="serial" HeaderText="serial" />
             <asp:BoundField DataField="mrp" HeaderText="Price" />
-               <asp:BoundField DataField="bv" HeaderText="BV" />
+            <asp:BoundField DataField="bv" HeaderText="BV" />
               <asp:TemplateField HeaderText="Image" >
                 <ItemTemplate>
                    
@@ -28,7 +27,7 @@
                 
               </asp:TemplateField>
              <asp:BoundField DataField="stock" HeaderText="Stock" />
-              <asp:TemplateField HeaderText="Stock Updated Date" >
+              <asp:TemplateField HeaderText="Date" >
                 <ItemTemplate>
                    
                     <asp:Label ID="lbldate" runat="server" Text='<%#Eval("date") %>'></asp:Label>

@@ -14,8 +14,26 @@ public partial class Admin_Sale_Record : System.Web.UI.Page
     {
         if (!IsPostBack)
         {
+           
+            if(Session["success"]=="true")
+            {
+                Page.ClientScript.RegisterStartupScript(GetType(), "msgbox", "alert('Success');", true);
+            }
+            else
+            {
+
+            }
             bind();
         }
+        //else
+        //{
+        //    if (Request.QueryString["Success"] == "true")
+        //    {
+        //        Page.ClientScript.RegisterStartupScript(GetType(), "msgbox", "alert('Success');", true);
+        //        // Response.Redirect("Sale-Record.aspx");
+        //    }
+        //}
+       
     }
     protected void bind()
     {
@@ -25,6 +43,7 @@ public partial class Admin_Sale_Record : System.Web.UI.Page
             gvpins.DataSource = dt;
             gvpins.DataBind();
         }
+        Session["success"] = "false";
     }
 
     protected void lnkedit_Click(object sender, EventArgs e)

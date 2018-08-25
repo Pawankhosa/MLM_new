@@ -25,11 +25,12 @@ public partial class Admin_seveninstall : System.Web.UI.Page
         MyDT.Columns.Add("Father");
         MyDT.Columns.Add("Address");
         MyDT.Columns.Add("SponserName");
+        MyDT.Columns.Add("SponserID");
         MyDT.Columns.Add("cnt");
         MyDT.Columns.Add();
      
         DataTable dt = new DataTable();
-        dt = objsql.GetTable("select distinct i.id,m.Name,m.mobile,m.address,m.father,(select name from MEMBER_CREATION where Id=m.spon) as sponsname,i.paid,cnt=(select count(*) from installment where id=i.Id ) from installment i Inner join MEMBER_CREATION m on m.id=i.Id and i.paid='0'");
+        dt = objsql.GetTable("select distinct i.id,m.Name,m.mobile,m.address,m.father,m.spon,(select name from MEMBER_CREATION where Id=m.spon) as sponsname,i.paid,cnt=(select count(*) from installment where id=i.Id ) from installment i Inner join MEMBER_CREATION m on m.id=i.Id and i.paid='0'");
         foreach (DataRow dr in dt.Rows)
         {
          
@@ -45,7 +46,8 @@ public partial class Admin_seveninstall : System.Web.UI.Page
                     MyRow[3] = dr["father"];
                     MyRow[4] = dr["address"];
                     MyRow[5] = dr["sponsname"];
-                    MyRow[6] = dr["cnt"];
+                    MyRow[6] = dr["spon"];
+                    MyRow[7] = dr["cnt"];
                     MyDT.Rows.Add(MyRow);
                 //}
                 //else

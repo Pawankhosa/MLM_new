@@ -240,6 +240,7 @@ public partial class Admin_billing_product : System.Web.UI.Page
         //    }
 
         //}
+        Session["success"] = "true";
         Response.Redirect("Sale-Record.aspx");
 
     }

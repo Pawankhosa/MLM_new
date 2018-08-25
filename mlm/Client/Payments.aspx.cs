@@ -70,4 +70,16 @@ public partial class Client_Default2 : System.Web.UI.Page
             Response.Redirect("transfer.aspx?sr="+e.CommandArgument);
         }
     }
+
+    protected void GridView1_RowDataBound(object sender, GridViewRowEventArgs e)
+    {
+        if (e.Row.RowType == DataControlRowType.DataRow)
+        {
+            //Label lblpaid = (Label)e.Row.FindControl("lblpaid");
+            //if(lblpaid.Text=="1")
+            //{
+
+            //}
+        }
+    }
 }
