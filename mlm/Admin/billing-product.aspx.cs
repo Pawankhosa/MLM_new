@@ -47,7 +47,6 @@ public partial class Admin_billing_product : System.Web.UI.Page
                     MyDT.Columns.Add("id", System.Type.GetType("System.Int32"));
 
                     MyDT.Columns.Add("Name");
-
                     MyDT.Columns.Add("Quantity");
                     MyDT.Columns.Add("Price");
                     MyDT.Columns.Add("BV");
@@ -55,6 +54,7 @@ public partial class Admin_billing_product : System.Web.UI.Page
                     MyDT.Columns.Add("BVTotal");
                     MyDT.Columns.Add("pid");
                     MyDT.Columns.Add("Code");
+                    MyDT.Columns.Add("Serial");
                     MyDT.Columns.Add();
 
                     MyRow = MyDT.NewRow();
@@ -62,14 +62,15 @@ public partial class Admin_billing_product : System.Web.UI.Page
                     MyRow[0] = MyDT.Rows.Count + 1;
 
                     MyRow[1] = txtname.Text;
-
+                   
                     MyRow[2] = txtqty.Text;
-                    MyRow[3] = Common.Get(objsql.GetSingleValue("select mrp from tblproduct where name='" + txtname.Text + "'"));
-                    MyRow[4] = Common.Get(objsql.GetSingleValue("select bv from tblproduct where name='" + txtname.Text + "'"));
+                    MyRow[3] = Common.Get(objsql.GetSingleValue("select mrp from inventoryproduct where name='" + txtname.Text + "'"));
+                    MyRow[4] = Common.Get(objsql.GetSingleValue("select bv from inventoryproduct where name='" + txtname.Text + "'"));
                     MyRow[5] = (Convert.ToInt32(MyRow[3]) * Convert.ToInt32(MyRow[2]));
                     MyRow[6] = (Convert.ToInt32(MyRow[4]) * Convert.ToInt32(MyRow[2]));
-                    MyRow[7] = Common.Get(objsql.GetSingleValue("select id from tblproduct where name='" + txtname.Text + "'"));
-                    MyRow[8] = Common.Get(objsql.GetSingleValue("select code from tblproduct where name='" + txtname.Text + "'"));
+                    MyRow[7] = Common.Get(objsql.GetSingleValue("select id from inventoryproduct where name='" + txtname.Text + "'"));
+                    MyRow[8] = Common.Get(objsql.GetSingleValue("select code from inventoryproduct where name='" + txtname.Text + "'"));
+                    MyRow[9] = txtserial.Text;
                     MyDT.Rows.Add(MyRow);
 
 
@@ -92,8 +93,8 @@ public partial class Admin_billing_product : System.Web.UI.Page
 
                             DataRow dr = dtr;
                             dr["Quantity"] = qt.ToString();
-                            dr["Price"] = Common.Get(objsql.GetSingleValue("select mrp from tblproduct where code='" + code + "'"));
-                            dr["BV"] = Common.Get(objsql.GetSingleValue("select bv from tblproduct where code='" + code + "'"));
+                            dr["Price"] = Common.Get(objsql.GetSingleValue("select mrp from inventoryproduct where code='" + code + "'"));
+                            dr["BV"] = Common.Get(objsql.GetSingleValue("select bv from inventoryproduct where code='" + code + "'"));
                             dr["Total"] = (Convert.ToInt32(dr["Price"].ToString()) * Convert.ToInt32(qt));
                             dr["BVTotal"] = (Convert.ToInt32(dr["BV"].ToString()) * Convert.ToInt32(qt));
                             MyDT.AcceptChanges();
@@ -118,12 +119,13 @@ public partial class Admin_billing_product : System.Web.UI.Page
                         MyRow[1] = txtname.Text;
 
                         MyRow[2] = txtqty.Text;
-                        MyRow[3] = Common.Get(objsql.GetSingleValue("select mrp from tblproduct where name='" + txtname.Text + "'"));
-                        MyRow[4] = Common.Get(objsql.GetSingleValue("select bv from tblproduct where name='" + txtname.Text + "'"));
+                        MyRow[3] = Common.Get(objsql.GetSingleValue("select mrp from inventoryproduct where name='" + txtname.Text + "'"));
+                        MyRow[4] = Common.Get(objsql.GetSingleValue("select bv from inventoryproduct where name='" + txtname.Text + "'"));
                         MyRow[5] = (Convert.ToInt32(MyRow[3]) * Convert.ToInt32(MyRow[2]));
                         MyRow[6] = (Convert.ToInt32(MyRow[4]) * Convert.ToInt32(MyRow[2]));
-                        MyRow[7] = Common.Get(objsql.GetSingleValue("select id from tblproduct where name='" + txtname.Text + "'"));
+                        MyRow[7] = Common.Get(objsql.GetSingleValue("select id from inventoryproduct where name='" + txtname.Text + "'"));
                         MyRow[8] = code;
+                        MyRow[9] = MyRow[9] = txtserial.Text;
                         MyDT.Rows.Add(MyRow);
                         txtqty.Text = "0";
                         txtname.Text = "";
@@ -141,6 +143,7 @@ public partial class Admin_billing_product : System.Web.UI.Page
                 Button1.Visible = true;
                 txtname.Text = "";
                 txtqty.Text = "";
+                txtserial.Text = "";
             }
             else
             {
@@ -162,7 +165,7 @@ public partial class Admin_billing_product : System.Web.UI.Page
                     .ConnectionStrings["cn"].ConnectionString;
             using (SqlCommand cmd = new SqlCommand())
             {
-                cmd.CommandText = "select name from tblproduct where " +
+                cmd.CommandText = "select name from inventoryproduct where " +
                 "name like @SearchText + '%'";
                 cmd.Parameters.AddWithValue("@SearchText", prefixText);
                 cmd.Connection = conn;
@@ -206,12 +209,13 @@ public partial class Admin_billing_product : System.Web.UI.Page
         {
             HiddenField item = (HiddenField)gr.FindControl("hfid");
             HiddenField qty = (HiddenField)gr.FindControl("qty");
-            code = Common.Get(objsql.GetSingleValue("select code from tblproduct where id='" + item.Value + "'"));
-            objsql.ExecuteNonQuery("insert into tblSingle(purchaseid,date,regno,item,qty) values('" + invoice + "','" + txtdate.Text + "','" + txtregno.Text + "','" + item.Value + "','" + qty.Value + "')");
+            Label lblserial = (Label)gr.FindControl("lblserial");
+            code = Common.Get(objsql.GetSingleValue("select code from inventoryproduct where id='" + item.Value + "'"));
+            objsql.ExecuteNonQuery("insert into tblSingle(purchaseid,date,regno,item,qty,Serial) values('" + invoice + "','" + txtdate.Text + "','" + txtregno.Text + "','" + item.Value + "','" + qty.Value + "','"+ lblserial.Text+"')");
 
-            string stock = Common.Get(objsql.GetSingleValue("select stock from tblstock where code ='" + code + "'"));
+            string stock = Common.Get(objsql.GetSingleValue("select stock from inventorystock where code ='" + code + "'"));
             string dedqty = ((Convert.ToInt32(stock)) - (Convert.ToInt32(qty.Value))).ToString();
-            objsql.ExecuteNonQuery("update tblstock set stock='" + dedqty + "' where code ='" + code + "'");
+            objsql.ExecuteNonQuery("update inventorystock set stock='" + dedqty + "' where code ='" + code + "'");
 
         }
         //DataTable dtr = new DataTable();
@@ -247,12 +251,20 @@ public partial class Admin_billing_product : System.Web.UI.Page
 
     public void checkqty()
     {
-            code = Common.Get(objsql.GetSingleValue("select code from tblproduct where name='" + txtname.Text + "'"));
-            check = Common.Get(objsql.GetSingleValue("select stock from tblstock where code='" + code + "'"));
+            code = Common.Get(objsql.GetSingleValue("select code from inventoryproduct where name='" + txtname.Text + "'"));
+            check = Common.Get(objsql.GetSingleValue("select stock from inventorystock where code='" + code + "'"));
             if (Convert.ToInt32(check) < Convert.ToInt32(txtqty.Text))
             {
                 ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('Only " + check + " stock is left')", true);
             }
+    }
 
+    protected void txtserial_TextChanged(object sender, EventArgs e)
+    {
+        string used = Common.Get(objsql.GetSingleValue("select serial from tblSingle where serial='" + txtserial.Text + "'"));
+        if(used!="" && used!=null)
+        {
+            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "alertMessage", "alert('This serial number already exist')", true);
+        }
     }
 }

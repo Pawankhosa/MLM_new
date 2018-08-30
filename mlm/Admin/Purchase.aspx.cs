@@ -88,6 +88,7 @@ public partial class Admin_Purchase : System.Web.UI.Page
                     MyDT.Columns.Add("BVTotal");
                     MyDT.Columns.Add("pid");
                     MyDT.Columns.Add("Code");
+                    MyDT.Columns.Add("Serial");
                     MyDT.Columns.Add();
 
                     MyRow = MyDT.NewRow();
@@ -103,6 +104,7 @@ public partial class Admin_Purchase : System.Web.UI.Page
                     MyRow[6] = (Convert.ToInt32(MyRow[4]) * Convert.ToInt32(MyRow[2]));
                     MyRow[7] = Common.Get(objsql.GetSingleValue("select id from tblproduct where name='" + txtname.Text + "'"));
                     MyRow[8] = Common.Get(objsql.GetSingleValue("select code from tblproduct where name='" + txtname.Text + "'"));
+                    MyRow[9] = Common.Get(objsql.GetSingleValue("select serial from tblproduct where name='" + txtname.Text + "'"));
                     MyDT.Rows.Add(MyRow);
 
 
@@ -152,6 +154,7 @@ public partial class Admin_Purchase : System.Web.UI.Page
                         MyRow[6] = (Convert.ToInt32(MyRow[4]) * Convert.ToInt32(MyRow[2]));
                         MyRow[7] = Common.Get(objsql.GetSingleValue("select id from tblproduct where name='" + txtname.Text + "'"));
                         MyRow[8] = code;
+                        MyRow[9] = Common.Get(objsql.GetSingleValue("select serial from tblproduct where name='" + txtname.Text + "'"));
                         MyDT.Rows.Add(MyRow);
                     }
 

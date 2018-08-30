@@ -23,7 +23,7 @@ public partial class Admin_SaleHistory : System.Web.UI.Page
     }
     protected void bind()
     {
-        dt = objsql.GetTable("  select p.name,o.Purchaseid,o.date,o.qty,p.mrp,p.bv from tblproduct p , singleorder o where p.id=o.item and o.Purchaseid='" + Request.QueryString["id"] + "'");
+        dt = objsql.GetTable("  select p.name,o.Purchaseid,o.date,o.qty,p.mrp,p.bv,p.serial from tblproduct p , singleorder o where p.id=o.item and o.Purchaseid='" + Request.QueryString["id"] + "'");
         if (dt.Rows.Count > 0)
         {
             gvpins.DataSource = dt;

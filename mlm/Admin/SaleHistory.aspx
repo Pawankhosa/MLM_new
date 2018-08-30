@@ -13,6 +13,7 @@
                     <th>Sr.No</th>
                     <th>Date</th>
                     <th>Product Name</th>
+                    <th>Serial No.</th>
                     <th>Quantity</th>
                     <th>MRP</th>
                     <th>BV</th>
@@ -28,6 +29,8 @@
                             <%#Convert.ToDateTime(Eval("date")).ToString("dd/MM/yyyy") %></td>
                         <td>
                             <%#Eval("name") %></td>
+                        <td>
+                            <%#Eval("serial") %></td>
                         <td>
                             <%#Eval("qty") %></td>
                         <td>

@@ -138,18 +138,22 @@ public partial class Admin_Default : System.Web.UI.Page
                 else
                 {
                     {
-                        SqlCommand cmd1 = new SqlCommand();
-                        cmd1.CommandText = "insert into installment values(@SR,@DATE_ENTRY,@ID,(select isnull(max(sno),0)+1 from installment),@bookid,@adminid,@status,@paid)";
-                        cmd1.Parameters.Add("@DATE_ENTRY", SqlDbType.DateTime).Value = Convert.ToDateTime(TextBox2.Text);
-                        cmd1.Parameters.Add("@ID", SqlDbType.VarChar).Value = Convert.ToString(TextBox1.Text.ToUpper());
-                        cmd1.Parameters.Add("@SR", SqlDbType.VarChar).Value = Convert.ToString(TextBox4.Text.ToUpper());
-                        cmd1.Parameters.Add("@bookid", SqlDbType.VarChar).Value = bookid;
-                        cmd1.Parameters.Add("@adminid", SqlDbType.VarChar).Value = adminid;
-                        cmd1.Parameters.Add("@status", SqlDbType.VarChar).Value = "Free";
-                        cmd1.Parameters.Add("@paid", SqlDbType.VarChar).Value = "0";
-                        cmd1.Connection = con;
-                        cmd1.ExecuteNonQuery();
+                        string srno = Common.Get(objsql.GetSingleValue("select isnull(max(sno),0)+1 from installment"));
+                        //SqlCommand cmd1 = new SqlCommand();
+                        //cmd1.CommandText = "insert into installment values(@DATE_ENTRY,@ID,@SNO,@SR,@bookid,@adminid,@status,@paid,@purchaseid)";
+                        //cmd1.Parameters.Add("@DATE_ENTRY", SqlDbType.DateTime).Value = TextBox2.Text;
+                        //cmd1.Parameters.Add("@ID", SqlDbType.VarChar).Value = Convert.ToString(TextBox1.Text.ToUpper());
+                        //cmd1.Parameters.Add("@SNO", SqlDbType.VarChar).Value =srno;
+                        //cmd1.Parameters.Add("@SR", SqlDbType.VarChar).Value = Convert.ToString(TextBox4.Text.ToUpper());
+                        //cmd1.Parameters.Add("@bookid", SqlDbType.VarChar).Value = bookid;
+                        //cmd1.Parameters.Add("@adminid", SqlDbType.VarChar).Value = adminid;
+                        //cmd1.Parameters.Add("@status", SqlDbType.VarChar).Value = "Free";
+                        //cmd1.Parameters.Add("@paid", SqlDbType.Bit).Value = true;
+                        //cmd1.Parameters.Add("@purchaseid", SqlDbType.VarChar).Value = "";
+                        //cmd1.Connection = con;
 
+                        //cmd1.ExecuteNonQuery();
+                        objsql.ExecuteNonQuery("insert into installment(DATE_ENTRY,ID,SNO,SR,bookid,adminid,status,paid) Values('" + TextBox2.Text + "','" + TextBox1.Text.ToUpper() + "','" + srno + "','" + TextBox4.Text.ToUpper() + "','" + bookid + "','" + adminid + "','Free','0')");
                         xx:;
                         int count =Convert.ToInt32(Common.Get(objsql.GetSingleValue("select count(*) from installment where id='" + txtid.Value + "'")));
                         if (count == 8)
@@ -157,17 +161,18 @@ public partial class Admin_Default : System.Web.UI.Page
                             string spon = Common.Get(objsql.GetSingleValue("select spon from member_creation where id='" + txtid.Value + "'"));
                             if (spon != "")
                             {
-                                SqlCommand cmd23 = new SqlCommand();
-                                cmd23.CommandText = "insert into installment values(@SR,@DATE_ENTRY,@ID,(select isnull(max(sno),0)+1 from installment),@bookid,@adminid,@status,@paid)";
-                                cmd23.Parameters.Add("@DATE_ENTRY", SqlDbType.DateTime).Value = Convert.ToDateTime(TextBox2.Text);
-                                cmd23.Parameters.Add("@ID", SqlDbType.VarChar).Value = Convert.ToString(spon.ToUpper());
-                                cmd23.Parameters.Add("@SR", SqlDbType.VarChar).Value = Convert.ToString(txtid.Value.ToUpper());
-                                cmd23.Parameters.Add("@bookid", SqlDbType.VarChar).Value = "";
-                                cmd23.Parameters.Add("@adminid", SqlDbType.VarChar).Value = "";
-                                cmd23.Parameters.Add("@status", SqlDbType.VarChar).Value = "Free";
-                                cmd23.Parameters.Add("@paid", SqlDbType.VarChar).Value = "0";
-                                cmd23.Connection = con;
-                                cmd23.ExecuteNonQuery();
+                                //SqlCommand cmd23 = new SqlCommand();
+                                //cmd23.CommandText = "insert into installment values(@SR,@DATE_ENTRY,@ID,(select isnull(max(sno),0)+1 from installment),@bookid,@adminid,@status,@paid)";
+                                //cmd23.Parameters.Add("@DATE_ENTRY", SqlDbType.DateTime).Value = Convert.ToDateTime(TextBox2.Text);
+                                //cmd23.Parameters.Add("@ID", SqlDbType.VarChar).Value = Convert.ToString(spon.ToUpper());
+                                //cmd23.Parameters.Add("@SR", SqlDbType.VarChar).Value = Convert.ToString(txtid.Value.ToUpper());
+                                //cmd23.Parameters.Add("@bookid", SqlDbType.VarChar).Value = "";
+                                //cmd23.Parameters.Add("@adminid", SqlDbType.VarChar).Value = "";
+                                //cmd23.Parameters.Add("@status", SqlDbType.VarChar).Value = "Free";
+                                //cmd23.Parameters.Add("@paid", SqlDbType.Bit).Value = "0";
+                                //cmd23.Connection = con;
+                                //cmd23.ExecuteNonQuery();
+                                objsql.ExecuteNonQuery("insert into installment(DATE_ENTRY,ID,SNO,SR,bookid,adminid,status,paid) Values('" + TextBox2.Text + "','" + spon.ToUpper() + "','" + srno + "','" + txtid.Value.ToUpper() + "','','','Free','0')");
                                 txtid.Value = spon;
                                 goto xx;
                             }

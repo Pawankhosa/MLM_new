@@ -8,6 +8,12 @@ public partial class Client_Default2 : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
+        if(!IsPostBack)
+        {
+
+        }
+        TextBox1.Attributes.Add("readonly", "readonly");
+        TextBox2.Attributes.Add("readonly", "readonly");
         //f1();
     }
     public void f1()

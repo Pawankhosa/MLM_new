@@ -22,7 +22,7 @@ public partial class Admin_History_Record : System.Web.UI.Page
     }
     protected void bind()
     {
-        dt = objsql.GetTable("  select p.name,o.Purchaseid,o.date,o.qty,p.mrp,p.bv from tblproduct p , tblSingle o where p.id=o.item and o.Purchaseid='" + Request.QueryString["id"] + "'");
+        dt = objsql.GetTable("select p.name,o.Purchaseid,o.date,o.qty,p.mrp,p.bv,o.serial from inventoryproduct p , tblSingle o where p.id=o.item and o.Purchaseid='" + Request.QueryString["id"] + "'");
         if (dt.Rows.Count > 0)
         {
             gvpins.DataSource = dt;
@@ -30,16 +30,16 @@ public partial class Admin_History_Record : System.Web.UI.Page
         }
     }
 
-    protected void lnkedit_Click(object sender, EventArgs e)
-    {
-        string id = (sender as LinkButton).CommandArgument;
-        Response.Redirect("product.aspx?id=" + id);
-    }
+    //protected void lnkedit_Click(object sender, EventArgs e)
+    //{
+    //    string id = (sender as LinkButton).CommandArgument;
+    //    Response.Redirect("product.aspx?id=" + id);
+    //}
 
-    protected void LinkButton1_Click(object sender, EventArgs e)
-    {
-        string id = (sender as LinkButton).CommandArgument;
-        objsql.ExecuteNonQuery("delete from tblproduct where id=" + id);
-        bind();
-    }
+    //protected void LinkButton1_Click(object sender, EventArgs e)
+    //{
+    //    string id = (sender as LinkButton).CommandArgument;
+    //    objsql.ExecuteNonQuery("delete from tblproduct where id=" + id);
+    //    bind();
+    //}
 }

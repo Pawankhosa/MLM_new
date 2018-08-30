@@ -37,7 +37,7 @@ public partial class Admin_Sale_Record : System.Web.UI.Page
     }
     protected void bind()
     {
-        dt = objsql.GetTable("select * from tblMaster");
+        dt = objsql.GetTable("select mast.purchaseid,mast.regno,mast.amount,m.NAME,m.FATHER,m.ADDRESS,m.MOBILE,s.date from tblMaster mast join MEMBER_CREATION m on m.ID=mast.regno join tblSingle s on s.purchaseid=mast.purchaseid");
         if (dt.Rows.Count > 0)
         {
             gvpins.DataSource = dt;
@@ -63,10 +63,10 @@ public partial class Admin_Sale_Record : System.Web.UI.Page
 
         foreach (DataRow dtr in dtm.Rows)
         {
-            string code = Common.Get(objsql.GetSingleValue("select code from tblproduct where id ='" + dtr["item"] + "'"));
-            string stock = Common.Get(objsql.GetSingleValue("select stock from tblstock where code ='" + code + "'"));
+            string code = Common.Get(objsql.GetSingleValue("select code from inventoryproduct where id ='" + dtr["item"] + "'"));
+            string stock = Common.Get(objsql.GetSingleValue("select stock from inventorystock where code ='" + code + "'"));
             string dedqty = ((Convert.ToInt32(stock)) + (Convert.ToInt32(dtr["qty"]))).ToString();
-            objsql.ExecuteNonQuery("update tblstock set stock='" + dedqty + "' where code ='" + code + "'");
+            objsql.ExecuteNonQuery("update inventorystock set stock='" + dedqty + "' where code ='" + code + "'");
         }
        
         objsql.ExecuteNonQuery("delete from tblSingle where purchaseid=" + id);

@@ -12,8 +12,14 @@
                 <tr>
                     <th>Sr.No</th>
                     <th>Regno</th>
+                    <th>Name</th>
+                    <th>Father Name</th>
+                    <th>Address</th>
+                    <th>Mobile</th>
+                     <th>Date</th>
                     <th>Invoice</th>
                     <th>Amount</th>
+
                     <th></th>
 
                 </tr>
@@ -22,9 +28,19 @@
                 <ItemTemplate>
                     <tr>
                         <td><%# Container.DataItemIndex+1 %></td>
-
                         <td>
                             <%#Eval("regno") %></td>
+                         <td>
+                            <%#Eval("NAME") %></td>
+
+                        <td>
+                            <%#Eval("FATHER") %></td>
+                        <td>
+                            <%#Eval("ADDRESS") %></td>
+                         <td>
+                            <%#Eval("MOBILE") %></td>
+                        <td>
+                            <%#Convert.ToDateTime(Eval("date")).ToString("dd/MM/yyyy") %></td>
 
                         <td>
                             <%#Eval("purchaseid") %></td>

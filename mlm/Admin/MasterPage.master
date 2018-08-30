@@ -162,7 +162,12 @@
                             <%--<li class="dropdown-container">--%>
                             <li class="dropdown-container"><a href="seveninstall.aspx">sale product</a>
                                 <hr class="new" />
-                                <a href="Sale-Record.aspx">Manage products sale </a></li>
+                                <a href="Sale-Record.aspx">Manage products sale </a>
+                                <hr class="new" />
+                                <a href="add-inventry.aspx">Add products </a>
+                                <hr class="new" />
+                                <a href="view-inventory.aspx">View products </a>
+                            </li>
                             <%-- </li>--%>
 
 
