@@ -1,5 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Admin/MasterPage.master" AutoEventWireup="true" CodeFile="seveninstall.aspx.cs" Inherits="Admin_seveninstall" %>
 
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
     <style>
         body {
@@ -34,12 +36,40 @@ td:hover {
                         </th>--%>
     <div style="width: 900px;">
         <div class=" filterable">
-            <%--  <table cellpadding="0" cellspacing="0" border="0" class="dataTable" id="example">--%>
+
+            <div class="col-md-12" style="margin-bottom:30px;">
+                <div class="col-md-3">
+                    Id No.
+                     <asp:TextBox ID="txtid" CssClass="form-control" runat="server"
+                                        AutoPostBack="True" OnTextChanged="TextBox4_TextChanged"></asp:TextBox>
+                </div>
+                <div class="col-md-3">
+                    Name
+                        <asp:TextBox ID="txtname" CssClass="form-control" runat="server"
+                                        AutoPostBack="True" OnTextChanged="TextBox3_TextChanged"></asp:TextBox>
+                </div>
+                <div class="col-md-3">
+                    Mobile
+                      <asp:TextBox ID="txtmobile" CssClass="form-control" runat="server"
+                                        AutoPostBack="True" OnTextChanged="TextBox5_TextChanged"></asp:TextBox>
+                </div>
+                <div class="col-md-3">
+                    Total Ins.
+                     <asp:TextBox ID="txttotal" CssClass="form-control" runat="server" OnTextChanged="txttotal_TextChanged" AutoPostBack="true"></asp:TextBox>
+                </div>
+            </div>
             <table class="table">
-                <thead>
-                    <tr class="filters">
-                        <th>SNo.</th>
-                        <th>
+                <tr>
+                    <th>SNo.</th>
+                    <th>Name</th>
+                    <th>Date</th>
+                    <th>Father Name</th>
+                    <th>Address</th>
+                    <th>Mobile</th>
+                    <th>Sponser Name/ Sponser ID</th>
+                    <th>Total Installments</th>
+                    <th>Action</th>
+                    <%-- <th>
                             <input type="text" class="form-control" placeholder="Id"></th>
                         <th>
                             <input type="text" class="form-control" placeholder="Name"></th>
@@ -55,12 +85,10 @@ td:hover {
                         <th>
                             <input type="text" class="form-control" placeholder="Total Installments"></th>
                         <th>
-                            <input type="text" class="form-control" readonly="readonly" placeholder="Action"></th>
-
-                    </tr>
-                </thead>
+                            <input type="text" class="form-control" readonly="readonly" placeholder="Action"></th>--%>
+                </tr>
                 <tbody>
-                    <asp:ListView ID="ListView1" runat="server" OnDataBound="ListView1_DataBound">
+                    <asp:ListView ID="ListView1" runat="server">
                         <ItemTemplate>
                             <tr>
                                 <td><%# Container.DataItemIndex+1 %></td>

@@ -103,5 +103,35 @@ public partial class Admin_Receipt : System.Web.UI.Page
     {
        // string sessionid = Common.Get(objsql.GetSingleValue("select id from tbllead where month='" + ddlmonth.SelectedItem.Value + "' and session='" + yearfilter.SelectedItem.Text + "'"));
         data(ddlmonth.SelectedItem.Text,yearfilter.SelectedItem.Text);
+        Panel1.Visible = true;
+        Panel2.Visible = false;
+        
+    }
+
+    protected void txtrecp_TextChanged(object sender, EventArgs e)
+    {
+        if(txtrecp.Text!="")
+        {
+            Panel2.Visible = true;
+            Panel1.Visible = false;
+            BindSearch();
+        }
+    }
+    public void BindSearch()
+    {
+        string bookno = Common.Get(objsql.GetSingleValue("select bookid from INSTALLMENT where sr ='"+ txtrecp.Text+"'"));
+
+       DataTable dts = new DataTable();
+        dts = objsql.GetTable("select ins.adminid,ins.ID,ins.DATE_ENTRY,ins.status,(select name from MEMBER_CREATION where ins.adminid=ID) as adminname,mm.NAME from INSTALLMENT ins join MEMBER_CREATION mm on mm.ID=ins.ID and ins.bookid='"+ bookno + "' and ins.SR='"+ txtrecp.Text + "'");
+        if(dts.Rows.Count>0)
+        {
+            GridView2.DataSource = dts;
+            GridView2.DataBind();
+        }
+        else
+        {
+            GridView2.DataSource = dts;
+            GridView2.DataBind();
+        }
     }
 }

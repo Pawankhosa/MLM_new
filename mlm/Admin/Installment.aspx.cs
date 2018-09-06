@@ -96,7 +96,7 @@ public partial class Admin_Default : System.Web.UI.Page
             row = "";
         }
         SqlCommand cmd = new SqlCommand();
-        cmd.CommandText = "select " + row + " row_number() over (order by " + order + ") as 'NO.',i.SR as RN,convert(varchar,i.DATE_ENTRY,106) as DATE,i.ID,m.NAME + ' ' + isnull(m.rel,'') + ' ' + m.father as NAME,(select count(*) from installment where date_entry<=i.date_entry and id=i.id) as 'INS-NO.' from installment i,member_creation m " + b + " order by " + order;
+        cmd.CommandText = "select " + row + " row_number() over (order by " + order + ") as 'NO.',i.SR as RN,convert(varchar,i.DATE_ENTRY,106) as DATE,i.ID,m.NAME + ' ' + isnull(m.rel,'') + ' ' + m.father as NAME,(select count(*) from installment where date_entry<=i.date_entry and id=i.id) as 'INS-NO.' from installment i,member_creation m " + b + " and i.Paid='0' order by " + order;
         cmd.Connection = con;
         GridView1.DataSource = cmd.ExecuteReader();
         GridView1.DataBind();

@@ -125,7 +125,7 @@ public partial class Admin_billing_product : System.Web.UI.Page
                         MyRow[6] = (Convert.ToInt32(MyRow[4]) * Convert.ToInt32(MyRow[2]));
                         MyRow[7] = Common.Get(objsql.GetSingleValue("select id from inventoryproduct where name='" + txtname.Text + "'"));
                         MyRow[8] = code;
-                        MyRow[9] = MyRow[9] = txtserial.Text;
+                        MyRow[9] = txtserial.Text;
                         MyDT.Rows.Add(MyRow);
                         txtqty.Text = "0";
                         txtname.Text = "";

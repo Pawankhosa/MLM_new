@@ -7,10 +7,10 @@ public partial class MasterPage : System.Web.UI.MasterPage
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        //if (Session["admin"] == null)
-        //{
-        //    Response.Redirect("../admin.aspx");
-        //}
+        if (Session["admin"] == null)
+        {
+            Response.Redirect("../admin.aspx");
+        }
     }
 
     protected void LinkButton1_Click(object sender, EventArgs e)
